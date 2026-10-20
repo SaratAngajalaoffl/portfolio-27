@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { ChevronDown, Moon, StrawHat, Sun } from "./icons";
+import { Moon, StrawHat, Sun } from "./icons";
 import { useReady } from "@/lib/ready";
 import { spring } from "./ui";
 
@@ -14,13 +14,7 @@ const sections = [
   { id: "contact", label: "Contact" },
 ];
 
-const accents = [
-  { id: "coral", label: "Coral", color: "#f47c7c" },
-  { id: "graphite", label: "Graphite", color: "#6e7385" },
-  { id: "pacific", label: "Pacific Blue", color: "#4f8fd6" },
-];
-
-function useRootAttr(name: "theme" | "accent", fallback: string) {
+function useRootAttr(name: "theme", fallback: string) {
   const [value, setValue] = useState(fallback);
   useEffect(() => setValue(document.documentElement.dataset[name] ?? fallback), [name, fallback]);
   const update = (v: string) => {
@@ -79,72 +73,6 @@ function ThemeSwitch() {
   );
 }
 
-function AccentSelect() {
-  const [accent, setAccent] = useRootAttr("accent", "coral");
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const current = accents.find((a) => a.id === accent) ?? accents[0];
-
-  useEffect(() => {
-    if (!open) return;
-    const close = (e: Event) => {
-      if (e instanceof KeyboardEvent ? e.key === "Escape" : !ref.current?.contains(e.target as Node)) setOpen(false);
-    };
-    window.addEventListener("pointerdown", close);
-    window.addEventListener("keydown", close);
-    return () => {
-      window.removeEventListener("pointerdown", close);
-      window.removeEventListener("keydown", close);
-    };
-  }, [open]);
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label="Accent colour"
-        onClick={() => setOpen((o) => !o)}
-        className="flex h-10 items-center gap-2 rounded-[14px] bg-surface px-3 text-sm font-bold text-ink-soft shadow-raised-sm transition-shadow active:shadow-pressed-sm"
-      >
-        <span className="swatch" style={{ background: current.color }} />
-        <span className="max-md:hidden">{current.label}</span>
-        <motion.span animate={{ rotate: open ? 180 : 0 }} className="max-md:hidden">
-          <ChevronDown className="size-4" />
-        </motion.span>
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            role="menu"
-            initial={{ opacity: 0, y: -10, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.9 }}
-            transition={spring}
-            className="clay absolute top-[calc(100%+14px)] right-0 grid min-w-[190px] origin-top-right gap-2.5 rounded-[22px] p-2.5 max-md:top-auto max-md:bottom-[calc(100%+14px)] max-md:origin-bottom-right"
-          >
-            {accents.map((a) => (
-              <button
-                key={a.id}
-                role="menuitemradio"
-                aria-checked={a.id === accent}
-                onClick={() => {
-                  setAccent(a.id);
-                  setOpen(false);
-                }}
-                className="flex h-[46px] items-center gap-3 rounded-[14px] bg-surface px-3.5 font-bold text-ink-soft shadow-raised-sm transition-shadow aria-checked:text-ink aria-checked:shadow-pressed-sm"
-              >
-                <span className="swatch" style={{ background: a.color }} />
-                {a.label}
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
 export function Nav() {
   const active = useActiveSection();
   const ready = useReady();
@@ -189,10 +117,7 @@ export function Nav() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <AccentSelect />
-          <ThemeSwitch />
-        </div>
+        <ThemeSwitch />
       </motion.nav>
     </>
   );

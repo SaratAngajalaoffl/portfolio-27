@@ -21,8 +21,8 @@ Set `profile.email` there to show an email button in the contact section.
 ## Design system
 
 Clay tokens live in `src/app/globals.css`: surfaces, shadows (`shadow-raised`, `shadow-pressed`, `shadow-accent`)
-and the accent palette. The theme (light/dark) and accent (coral/graphite/pacific) are swapped through
-`data-theme` / `data-accent` on `<html>` and persisted in localStorage.
+and the accent palette. The theme (light/dark) is toggled via `data-theme` on `<html>` and persisted in localStorage.
+The accent is set at build time with `NEXT_PUBLIC_ACCENT` (`coral` (default), `graphite` or `pacific`), e.g. in `.env.local`.
 
 ## Deploy
 

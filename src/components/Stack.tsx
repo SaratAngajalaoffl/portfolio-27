@@ -15,7 +15,11 @@ function Key({ label, hot, delay }: { label: string; hot: boolean; delay: number
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
       transition={{ type: "spring", stiffness: 260, damping: 15, delay }}
-      animate={hot ? { scaleY: [1, 0.82, 1.06, 1], scaleX: [1, 1.08, 0.97, 1], y: [0, 4, -3, 0] } : undefined}
+      animate={
+        hot
+          ? { scaleY: [1, 0.82, 1.06, 1], scaleX: [1, 1.08, 0.97, 1], y: [0, 4, -3, 0], transition: { duration: 0.5, ease: "easeOut" } }
+          : undefined
+      }
       whileHover={{ y: -4 }}
       whileTap={{ scaleY: 0.82, scaleX: 1.1, y: 3 }}
       drag

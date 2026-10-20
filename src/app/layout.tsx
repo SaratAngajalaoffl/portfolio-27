@@ -8,7 +8,7 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], v
 
 const title = "Sarat Angajala · mugiwaraa.eth";
 const description =
-  "Sarat Angajala (mugiwaraa.eth): blockchain and AI financial infrastructure builder. Leading anera.markets at Anera Labs.";
+  "Sarat Angajala (mugiwaraa.eth): AI inference economics and AI development pipelines. Core Dev & Founders Office at Anera Labs.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://smugiwara.com"),
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     title,
-    description: "Blockchain + AI financial infrastructure builder. Designing markets where the incentives actually hold.",
+    description: "Researching the economics of AI inference and the pipelines that build software with AI. Previously cross-chain solvers and MEV.",
     images: ["/og.jpg"],
   },
   twitter: { card: "summary_large_image", site: "@mugiwaraa_eth", creator: "@mugiwaraa_eth" },
@@ -33,15 +33,19 @@ export const viewport: Viewport = {
   ],
 };
 
-// Runs before paint so the saved theme/accent never flashes
-const themeScript = `try{var d=document.documentElement;d.dataset.theme=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");d.dataset.accent=localStorage.getItem("accent")||"coral"}catch(e){}`;
+// Accent is fixed at build time: NEXT_PUBLIC_ACCENT=coral|graphite|pacific
+const accents = ["coral", "graphite", "pacific"];
+const accent = accents.includes(process.env.NEXT_PUBLIC_ACCENT ?? "") ? process.env.NEXT_PUBLIC_ACCENT : "coral";
+
+// Runs before paint so the saved theme never flashes
+const themeScript = `try{document.documentElement.dataset.theme=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       data-theme="light"
-      data-accent="coral"
+      data-accent={accent}
       suppressHydrationWarning
       className={`${fredoka.variable} ${nunito.variable} ${jetbrains.variable}`}
     >

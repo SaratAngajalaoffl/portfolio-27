@@ -8,6 +8,20 @@ import { Reveal, Section, SectionHeader } from "./ui";
 
 const last = jobs.length - 1;
 
+/* Renders [text](url) segments in a bullet as links */
+function withLinks(text: string) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/).map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    return m ? (
+      <a key={i} href={m[2]} target="_blank" rel="noreferrer" className="font-bold text-ink underline decoration-accent underline-offset-4 hover:text-accent">
+        {m[1]}
+      </a>
+    ) : (
+      part
+    );
+  });
+}
+
 export function Experience() {
   const [index, setIndex] = useState(last);
   const [dir, setDir] = useState(1);
@@ -53,7 +67,7 @@ export function Experience() {
             Six years, <span className="text-accent">one through-line.</span>
           </>
         }
-        lede="From fintech flows to wallet-less NFTs to market infrastructure for AI compute. Drag the slider or press play."
+        lede="From fintech flows to wallet-less NFTs to cross-chain solvers, and now the economics of AI inference. Drag the slider or press play."
       />
 
       <div className="grid gap-9">
@@ -150,7 +164,15 @@ export function Experience() {
               >
                 <div>
                   <span className="font-mono text-[13px] tracking-wide text-accent">{job.period}</span>
-                  <h3 className="mt-2.5 mb-1.5 font-display text-[clamp(32px,4vw,46px)] leading-[1.05] font-semibold">{job.company}</h3>
+                  <h3 className="mt-2.5 mb-1.5 font-display text-[clamp(32px,4vw,46px)] leading-[1.05] font-semibold">
+                    {job.site ? (
+                      <a href={job.site} target="_blank" rel="noreferrer" className="hover:text-accent">
+                        {job.company}
+                      </a>
+                    ) : (
+                      job.company
+                    )}
+                  </h3>
                   <div className="mb-4 font-extrabold text-ink-soft">{job.role}</div>
                   <p className="mb-5 text-ink-soft">{job.summary}</p>
                   <div className="flex flex-wrap gap-2.5">
@@ -162,7 +184,7 @@ export function Experience() {
                   </div>
                   {job.link && (
                     <a href={job.link} target="_blank" rel="noreferrer" className="btn btn-sm btn-accent mt-6">
-                      anera.markets <Arrow />
+                      {new URL(job.link).hostname} <Arrow />
                     </a>
                   )}
                 </div>
@@ -175,7 +197,7 @@ export function Experience() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.15 + i * 0.08 }}
                     >
-                      {b}
+                      <span>{withLinks(b)}</span>
                     </motion.li>
                   ))}
                 </ul>

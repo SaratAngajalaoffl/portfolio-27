@@ -107,7 +107,7 @@ function Avatar({ mx, my }: { mx: MotionValue<number>; my: MotionValue<number> }
         </motion.div>
 
         <motion.a
-          href={profile.links.anera}
+          href={profile.links.aneraLabs}
           target="_blank"
           rel="noreferrer"
           className="clay absolute bottom-0 -left-[4%] flex items-center gap-3 rounded-[22px] py-3 pr-[18px] pl-3 max-md:-left-[8%]"
@@ -119,8 +119,8 @@ function Avatar({ mx, my }: { mx: MotionValue<number>; my: MotionValue<number> }
             <Pulse className="w-5" />
           </span>
           <span>
-            <small className="block text-xs leading-tight font-bold text-ink-faint">Currently leading</small>
-            <b className="font-display text-base font-medium">anera.markets</b>
+            <small className="block text-xs leading-tight font-bold text-ink-faint">Currently at</small>
+            <b className="font-display text-base font-medium">Anera Labs</b>
           </span>
         </motion.a>
       </motion.div>
@@ -250,14 +250,14 @@ export function Hero() {
         <div className="grid items-center gap-[clamp(30px,6vw,80px)] lg:grid-cols-[1.15fr_0.85fr]">
           <div>
             <motion.a
-              href={profile.links.anera}
+              href={profile.links.aneraLabs}
               target="_blank"
               rel="noreferrer"
               className="clay inline-flex items-center gap-2.5 rounded-full py-2 pr-4 pl-3 text-sm font-bold text-ink-soft"
               {...fade(0.05)}
             >
               <span className="pulse" />
-              Building <b className="text-ink">anera.markets</b> at Anera Labs
+              Core Dev &amp; Founders Office at <b className="text-ink">Anera Labs</b>
             </motion.a>
 
             <h1 className="mt-7 mb-3 font-display text-[clamp(54px,9.4vw,124px)] leading-[0.95] font-semibold tracking-tight">

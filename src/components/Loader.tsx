@@ -54,7 +54,8 @@ export function Loader() {
                 <motion.span
                   key={i}
                   className="clay-accent absolute size-3.5 rounded-full"
-                  style={{ left: `calc(50% + ${Math.cos(a) * 64}px - 7px)`, top: `calc(50% + ${Math.sin(a) * 64}px - 7px)` }}
+                  // Container is 180px, dot is 14px: center at 90 - 7 = 83px. Rounded so SSR and client output match.
+                  style={{ left: Math.round((83 + Math.cos(a) * 64) * 100) / 100, top: Math.round((83 + Math.sin(a) * 64) * 100) / 100 }}
                   animate={{ opacity: [0.2, 1, 0.2], scale: [0.6, 1.15, 0.6] }}
                   transition={{ duration: 1.1, repeat: Infinity, delay: (i / DOTS) * 1.1, ease: "easeInOut" }}
                 />

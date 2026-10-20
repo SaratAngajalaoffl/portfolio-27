@@ -3,14 +3,14 @@ export const profile = {
   alias: "mugiwaraa.eth",
   location: "Bangalore, India",
   hometown: "Visakhapatnam",
-  roles: ["Blockchain engineer", "Market designer", "DeFi × AI infra builder", "Homelab tinkerer"],
+  roles: ["Compute economics analyst", "Agentic workflow nerd", "Ex-MEV & solver dev", "Homelab tinkerer", "Arch ricer"],
   tagline:
-    "I build the financial plumbing where onchain DeFi meets AI-inference token economies, and I spend most of my time making sure the incentives actually hold.",
+    "I'm obsessed with agentic workflows: building the tooling that lets agents plan, code and ship real software, then pushing it until it breaks. Before that, I spent years building cross-chain solvers and MEV infrastructure.",
   links: {
     github: "https://github.com/SaratAngajalaoffl",
     x: "https://x.com/mugiwaraa_eth",
     linkedin: "https://www.linkedin.com/in/saratangajala",
-    anera: "https://anera.markets",
+    aneraLabs: "https://aneralabs.xyz",
   },
   // Leave this empty to hide the email button
   email: "",
@@ -23,8 +23,8 @@ export const stats = [
 ];
 
 export const beliefs = [
-  "Incentives first, chains second",
-  "Design markets, don't just hop on them",
+  "Follow the data, not the hype",
+  "Build it to understand it",
   "Self-host what you can",
   "Ship it, then measure it",
 ];
@@ -34,8 +34,10 @@ export type Job = {
   role: string;
   period: string;
   year: string;
+  site?: string;
   link?: string;
   summary: string;
+  // Supports inline [text](url) links
   bullets: string[];
   tags: string[];
 };
@@ -67,30 +69,33 @@ export const jobs: Job[] = [
   },
   {
     company: "clanX",
-    role: "Freelance Projects",
+    role: "Freelance Developer",
     period: "Jan 2023 – Dec 2023",
     year: "2023",
-    summary: "Short, sharp builds for a range of clients.",
+    summary: "Freelancing through clanX, building applications for the companies they partnered with.",
     bullets: [
-      "Delivered NFT display tools on Polygon, carbon dashboards and student portals.",
+      "Built [lowsoot.com](https://lowsoot.com), a carbon dashboard product.",
+      "Built a management portal for Somaiya Education Institute in Mumbai.",
+      "Built an NFT wall product for displaying NFTs on Polygon.",
     ],
     tags: ["Polygon", "Dashboards", "Fullstack"],
   },
   {
     company: "Anera Labs",
-    role: "Founding Member · Lead, anera.markets",
+    role: "Core Dev & Founders Office",
     period: "Jan 2023 – Present",
     year: "Now",
+    site: "https://aneralabs.xyz",
     link: "https://anera.markets",
     summary:
-      "Leading anera.markets, the data and intelligence layer for the open-source AI inference economy.",
+      "My day job. Since 2025 it's been AI inference economics and AI-assisted engineering; before that, cross-chain solvers and MEV.",
     bullets: [
-      "Lead anera.markets: indices like AI-TDI, token-factory and model intelligence, and a data API that prices the inference economy.",
-      "Building the plumbing that lets you trade, hedge and price tokenized compute like any other commodity.",
-      "Previously led engineering on Cerebrum (tick-level CEX + DEX data engine), Icarus (Rust cross-chain relayer for Nitro, Synapse and Li.Fi) and Intent Markets.",
+      "Since 2025: collecting, processing and analysing data on what AI inference costs, which feeds anera.markets indices like AI-TDI, token-factory and model intelligence.",
+      "Researching AI development pipelines and bringing AI into how the lab builds and ships software.",
+      "Until 2025: led engineering on cross-chain solvers and MEV infra, including Icarus (Rust cross-chain relayer for Nitro, Synapse and Li.Fi), Cerebrum (tick-level CEX + DEX data engine) and Intent Markets.",
       "Designed infra for real-time orderflow execution, RPC ingestion and MEV-aware relayers, deployed across multiple EVM L2s.",
     ],
-    tags: ["Rust", "Python", "TypeScript", "MEV", "AI × DeFi"],
+    tags: ["Python", "Data pipelines", "AI inference", "Rust", "MEV"],
   },
 ];
 
@@ -102,6 +107,7 @@ export type Project = {
   kind: ("trading" | "infra" | "ai")[];
   repo: string;
   live?: string;
+  liveLabel?: string;
   stars?: number;
   icon: "jeeva" | "ygg" | "dots" | "lab" | "fin";
   hue: string;
@@ -135,6 +141,7 @@ export const projects: Project[] = [
     tags: ["Agents", "Docker", "Next.js"],
     kind: ["ai", "infra"],
     repo: "https://github.com/yggdrasil-hq/yggdrasil-core",
+    live: "https://yggdrasil.cfd",
     icon: "ygg",
     hue: "#7cc49a",
   },
@@ -163,6 +170,8 @@ export const projects: Project[] = [
     tags: ["Arch", "Hyprland", "Quickshell"],
     kind: ["infra"],
     repo: "https://github.com/SaratAngajalaoffl/dotfiles-arch",
+    live: "https://www.reddit.com/r/unixporn/s/hldsDp8vaB",
+    liveLabel: "Reddit",
     stars: 5,
     icon: "dots",
     hue: "#b28be0",

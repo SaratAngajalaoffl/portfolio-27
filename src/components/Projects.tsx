@@ -1,8 +1,8 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { profile, projects, type Project } from "@/lib/content";
+import { projects, type Project } from "@/lib/content";
 import { Arrow, Candles, GitHub, Heart, Server, Star, Terminal, Tree, Wallet } from "./icons";
 import { Reveal, Section, SectionHeader, softSpring, spring } from "./ui";
 
@@ -15,92 +15,6 @@ const filters = [
   { id: "infra", label: "Infra" },
 ] as const;
 
-/* A deterministic, upward-trending line, purely decorative */
-const chart = (() => {
-  const pts: [number, number][] = [];
-  let y = 150;
-  for (let i = 0; i <= 40; i++) {
-    y += Math.sin(i * 1.7) * 11 + Math.cos(i * 0.6) * 6 - 2.6;
-    pts.push([(i / 40) * 400, Math.max(12, Math.min(170, y))]);
-  }
-  const line = pts.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
-  return { line, area: `${line} L400,190 L0,190 Z`, end: pts[pts.length - 1] };
-})();
-
-function Featured() {
-  const gid = useId();
-  return (
-    <Reveal className="clay relative mb-8 grid gap-[clamp(20px,4vw,50px)] overflow-hidden rounded-clay-xl p-[clamp(26px,4vw,46px)] lg:grid-cols-2">
-      <div>
-        <span className="chip chip-in text-accent">★ Flagship · Anera Labs</span>
-        <h3 className="mt-4 mb-3.5 font-display text-[clamp(34px,4.6vw,54px)] leading-none font-semibold">anera.markets</h3>
-        <p className="mb-6 text-lg text-ink-soft">
-          The intelligence underwriting the token economy. Indices like AI-TDI, token-factory and model intelligence, and a data API that measures
-          how capital flows through compute into AI inference. I lead the project end to end.
-        </p>
-        <div className="mb-7 flex flex-wrap gap-2.5">
-          {["Indices", "Data API", "AI inference", "Market design"].map((t) => (
-            <span key={t} className="chip">
-              {t}
-            </span>
-          ))}
-        </div>
-        <a href={profile.links.anera} target="_blank" rel="noreferrer" className="btn btn-accent">
-          Explore anera.markets <Arrow />
-        </a>
-      </div>
-
-      <div className="clay-in flex flex-col gap-2.5 rounded-clay p-[22px]">
-        <div className="flex items-center justify-between text-sm font-extrabold text-ink-soft">
-          <span>Token demand</span>
-          <span className="flex items-center gap-2">
-            <span className="pulse !size-2.5" /> preview
-          </span>
-        </div>
-        <div className="min-h-[190px] flex-1">
-          <svg viewBox="0 0 400 190" preserveAspectRatio="none" className="size-full overflow-visible">
-            <defs>
-              <linearGradient id={`${gid}-a`} x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stopColor="var(--accent)" stopOpacity=".35" />
-                <stop offset="1" stopColor="var(--accent)" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient id={`${gid}-l`}>
-                <stop offset="0" stopColor="var(--accent-2)" />
-                <stop offset="1" stopColor="var(--accent)" />
-              </linearGradient>
-            </defs>
-            {[40, 90, 140].map((y) => (
-              <line key={y} x1="0" x2="400" y1={y} y2={y} stroke="var(--sd)" strokeDasharray="3 7" vectorEffect="non-scaling-stroke" />
-            ))}
-            <motion.path
-              d={chart.area}
-              fill={`url(#${gid}-a)`}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-            />
-            <motion.path
-              d={chart.line}
-              fill="none"
-              stroke={`url(#${gid}-l)`}
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              vectorEffect="non-scaling-stroke"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.8, ease: [0.65, 0, 0.35, 1] }}
-            />
-          </svg>
-        </div>
-        <span className="text-xs font-bold text-ink-faint">Illustrative chart. Real indices live on anera.markets.</span>
-      </div>
-    </Reveal>
-  );
-}
-
 /* Heart toggle that bursts clay crumbs */
 function HeartButton({ name }: { name: string }) {
   const [on, setOn] = useState(false);
@@ -112,7 +26,10 @@ function HeartButton({ name }: { name: string }) {
       className="btn btn-sm btn-icon relative overflow-visible"
       whileTap={{ scale: 0.8 }}
     >
-      <motion.span animate={on ? { scale: [1, 1.5, 1] } : { scale: 1 }} transition={spring}>
+      <motion.span
+        animate={on ? { scale: [1, 1.5, 1] } : { scale: 1 }}
+        transition={on ? { duration: 0.4, times: [0, 0.35, 1], ease: "easeOut" } : spring}
+      >
         <Heart className="!size-[18px]" fill={on ? "currentColor" : "none"} />
       </motion.span>
       <AnimatePresence>
@@ -206,7 +123,7 @@ function ProjectCard({ p }: { p: Project }) {
             </a>
             {p.live && (
               <a href={p.live} target="_blank" rel="noreferrer" className="btn btn-sm btn-accent">
-                Live <Arrow />
+                {p.liveLabel ?? "Live"} <Arrow />
               </a>
             )}
           </div>
@@ -231,7 +148,7 @@ export function Projects() {
               Things I&apos;ve <span className="text-accent">shaped.</span>
             </>
           }
-          lede="Work I lead, plus the side projects I build because I want them to exist."
+          lede="Jeeva, Yggdrasil and Fintrack are how I learn AI development pipelines: by building real things with them. The homelab and the rice are just for fun."
         />
         <Reveal className="mb-12">
           <div className="segmented" role="group" aria-label="Filter projects">
@@ -245,7 +162,6 @@ export function Projects() {
         </Reveal>
       </div>
 
-      <Featured />
 
       <motion.div layout className="grid grid-cols-[repeat(auto-fill,minmax(min(320px,100%),1fr))] gap-7">
         <AnimatePresence mode="popLayout">

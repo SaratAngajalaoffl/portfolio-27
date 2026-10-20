@@ -43,10 +43,10 @@ export function Contact() {
 
         <span className="eyebrow">05 · Contact</span>
         <h2 className="mx-auto mt-3.5 mb-4 max-w-[760px] font-display text-[clamp(36px,5.4vw,64px)] leading-[1.05] font-semibold tracking-tight">
-          Let&apos;s build markets <span className="text-accent">that hold.</span>
+          Let&apos;s talk <span className="text-accent">tokens and compute.</span>
         </h2>
         <p className="mx-auto mb-10 max-w-[560px] text-lg text-ink-soft">
-          Working on something at the edge of DeFi and AI? Want to argue about mechanism design? My DMs are open.
+          Thinking about what inference really costs, or how AI fits into the way software gets built? Want to compare homelabs or rices? My DMs are open.
         </p>
 
         <div className="mx-auto mb-9 flex max-w-[560px] gap-3.5 max-sm:flex-col">
