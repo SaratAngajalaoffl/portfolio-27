@@ -28,3 +28,21 @@ The accent is set at build time with `NEXT_PUBLIC_ACCENT` (`coral` (default), `g
 
 `pnpm build` emits a fully static site in `out/`, so it can be hosted on any static host (GitHub Pages,
 Cloudflare Pages, Netlify, Vercel). `public/CNAME` is already set to `smugiwara.com` for GitHub Pages.
+
+### Docker / homelab
+
+Every push to `main` builds a multi-arch (amd64 + arm64) nginx image and pushes it to GHCR
+(`.github/workflows/docker.yml`). Tags: `latest` (main), `sha-<short>`, and `X.Y.Z` / `X.Y` for `vX.Y.Z` git tags.
+Set the repo variable `NEXT_PUBLIC_ACCENT` to change the accent baked into the image.
+
+```yaml
+# compose.yaml
+services:
+  portfolio:
+    image: ghcr.io/saratangajalaoffl/portfolio-27:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+```
+
+Build locally with `docker build -t portfolio .` and run with `docker run -p 8080:8080 portfolio`.
