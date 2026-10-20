@@ -9,7 +9,7 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
     pnpm install --frozen-lockfile
 
 COPY . .
-ARG NEXT_PUBLIC_ACCENT=coral
+ARG NEXT_PUBLIC_ACCENT=orchid
 ENV NEXT_PUBLIC_ACCENT=$NEXT_PUBLIC_ACCENT \
     NEXT_TELEMETRY_DISABLED=1
 RUN pnpm build

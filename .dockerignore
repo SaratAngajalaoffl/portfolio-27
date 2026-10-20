@@ -8,3 +8,4 @@ out
 Dockerfile
 .dockerignore
 README.md
+docs

@@ -33,9 +33,9 @@ export const viewport: Viewport = {
   ],
 };
 
-// Accent is fixed at build time: NEXT_PUBLIC_ACCENT=coral|graphite|pacific
-const accents = ["coral", "graphite", "pacific"];
-const accent = accents.includes(process.env.NEXT_PUBLIC_ACCENT ?? "") ? process.env.NEXT_PUBLIC_ACCENT : "coral";
+// Accent is fixed at build time: NEXT_PUBLIC_ACCENT=orchid|coral|graphite|pacific
+const accents = ["orchid", "coral", "graphite", "pacific"];
+const accent = accents.includes(process.env.NEXT_PUBLIC_ACCENT ?? "") ? process.env.NEXT_PUBLIC_ACCENT : "orchid";
 
 // Runs before paint so the saved theme never flashes
 const themeScript = `try{document.documentElement.dataset.theme=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}`;

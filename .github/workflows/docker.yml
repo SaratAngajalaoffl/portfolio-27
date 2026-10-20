@@ -55,6 +55,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NEXT_PUBLIC_ACCENT=${{ vars.NEXT_PUBLIC_ACCENT || 'coral' }}
+            NEXT_PUBLIC_ACCENT=${{ vars.NEXT_PUBLIC_ACCENT || 'orchid' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

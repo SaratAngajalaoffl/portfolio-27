@@ -4,6 +4,25 @@ Personal portfolio of Sarat Angajala (mugiwaraa.eth), built with a claymorphism 
 
 **Stack:** Next.js (App Router, static export) · Tailwind CSS v4 · Framer Motion
 
+## Screenshots
+
+| Light | Dark |
+| --- | --- |
+| ![Desktop, light theme](docs/screenshots/desktop-light.png) | ![Desktop, dark theme](docs/screenshots/desktop-dark.png) |
+
+<p align="center">
+  <img src="docs/screenshots/mobile-light.png" alt="Mobile, light theme" width="260">
+  &nbsp;&nbsp;
+  <img src="docs/screenshots/mobile-dark.png" alt="Mobile, dark theme" width="260">
+</p>
+
+<details>
+<summary>Full page</summary>
+
+![Full page, light theme](docs/screenshots/desktop-full-light.png)
+
+</details>
+
 ## Develop
 
 ```sh
@@ -22,7 +41,7 @@ Set `profile.email` there to show an email button in the contact section.
 
 Clay tokens live in `src/app/globals.css`: surfaces, shadows (`shadow-raised`, `shadow-pressed`, `shadow-accent`)
 and the accent palette. The theme (light/dark) is toggled via `data-theme` on `<html>` and persisted in localStorage.
-The accent is set at build time with `NEXT_PUBLIC_ACCENT` (`coral` (default), `graphite` or `pacific`), e.g. in `.env.local`.
+The accent is set at build time with `NEXT_PUBLIC_ACCENT` (`orchid` (default, matched to the profile photo), `coral`, `graphite` or `pacific`), e.g. in `.env.local`.
 
 ## Deploy
 

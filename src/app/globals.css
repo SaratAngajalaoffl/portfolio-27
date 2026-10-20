@@ -15,10 +15,10 @@
   --hl: rgba(255, 255, 255, 0.75);
   --edge: rgba(255, 255, 255, 0.6);
 
-  --accent: #f47c7c;
-  --accent-2: #ffa79f;
-  --accent-deep: #d95c5c;
-  --accent-glow: rgba(244, 124, 124, 0.35);
+  --accent: #c2688b;
+  --accent-2: #e39ab5;
+  --accent-deep: #a24d6f;
+  --accent-glow: rgba(194, 104, 139, 0.35);
   color-scheme: light;
 }
 :root[data-theme="dark"] {
@@ -35,6 +35,11 @@
   --accent-glow: rgba(0, 0, 0, 0.45);
   color-scheme: dark;
 }
+:root[data-accent="coral"] {
+  --accent: #f47c7c;
+  --accent-2: #ffa79f;
+  --accent-deep: #d95c5c;
+}
 :root[data-accent="graphite"] {
   --accent: #6e7385;
   --accent-2: #9a9fb0;
@@ -44,6 +49,9 @@
   --accent: #4f8fd6;
   --accent-2: #8bbcf0;
   --accent-deep: #3a73b5;
+}
+:root[data-accent="coral"]:not([data-theme="dark"]) {
+  --accent-glow: rgba(244, 124, 124, 0.35);
 }
 :root[data-accent="graphite"]:not([data-theme="dark"]) {
   --accent-glow: rgba(110, 115, 133, 0.35);
